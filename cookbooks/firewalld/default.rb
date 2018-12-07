@@ -3,19 +3,19 @@ service 'firewalld' do
 end
 
 # 自分用のsshポートを開ける
-execute "add my-ssh port" do
+execute "Open ssh port" do
   user "root"
   command "firewall-cmd --permanent --add-port=#{node[:ssh][:port]}/tcp --zone=public"
 end
 
 # デフォルトのsshポートを閉じる
-execute "remove default ssh port" do
+execute "Close default ssh port" do
   user "root"
   command "firewall-cmd --permanent --remove-service=ssh"
 end
 
 # webサーバー系のポートを開ける
-execute "add web server ports" do
+execute "Open web server ports" do
   user "root"
   cmd = [
     'firewall-cmd --add-port=80/tcp --permanent --zone=public',
@@ -25,7 +25,7 @@ execute "add web server ports" do
 end
 
 # メールサーバー用のポートを開ける
-execute "add mail server ports" do
+execute "Open mail server ports" do
   user "root"
   cmd = [
     'firewall-cmd --add-port=25/tcp --permanent --zone=public',
