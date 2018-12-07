@@ -1,0 +1,12 @@
+user:
+  name: "YOUR_NAME"
+  password: "$6$salt$0aisk/8XglrSDrdYJ93lynbTrr1z0NpudkEkJKqvq.elLXdTP6i29roBReXxYqOhFgXwho5ysuISTbUhMFNqy1"
+
+ssh:
+  key: "YOUR_SSH_KEY_NAME.pub"
+  port: 7193
+
+domain: example.com
+
+letsencrypt:
+  mail_address: admin@example.com

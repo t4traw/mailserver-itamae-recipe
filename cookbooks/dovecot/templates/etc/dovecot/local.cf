@@ -1,0 +1,36 @@
+# debug関係
+auth_debug_passwords = yes
+auth_verbose = no
+auth_debug = yes
+
+listen = *
+disable_plaintext_auth = no
+auth_mechanisms = PLAIN LOGIN CRAM-MD5
+mail_location = maildir:/home/muser/mail/%d/%n
+first_valid_uid = 10000
+first_valid_gid = 10000
+mail_plugins = quota
+
+protocol imap {
+  imap_client_workarounds = delay-newmail tb-extra-mailbox-sep
+  mail_plugins = $mail_plugins imap_quota
+}
+protocol pop3 {
+  pop3_client_workarounds = outlook-no-nuls oe-ns-eoh
+}
+passdb {
+  driver = sql
+  args = /etc/dovecot/dovecot-mysql.conf
+}
+userdb {
+  driver = sql
+  args = /etc/dovecot/dovecot-mysql.conf
+}
+service auth {
+  unix_listener /var/spool/postfix/private/auth {
+    mode = 0666
+  }
+}
+plugin {
+  quota = maildir:User quota
+}
